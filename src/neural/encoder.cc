@@ -201,9 +201,9 @@ InputPlanes EncodePositionForNN(
       if (we_are_black) result[kAuxPlaneBase + 4].SetAll();
     }
     if (IsHectopliesFormat(input_format)) {
-      result[kAuxPlaneBase + 5].Fill(history.Last().GetRule50Ply() / 100.0f);
+      result[kAuxPlaneBase + 5].Fill(0);
     } else {
-      result[kAuxPlaneBase + 5].Fill(history.Last().GetRule50Ply());
+      result[kAuxPlaneBase + 5].Fill(0);
     }
     // Plane kAuxPlaneBase + 6 used to be movecount plane, now it's all zeros
     // unless we need it for canonical armageddon side to move.
