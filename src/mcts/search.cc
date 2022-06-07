@@ -1888,7 +1888,13 @@ void SearchWorker::ExtendNode(Node* node, int depth,
         } else if (wdl == WDL_LOSS) {
           node->MakeTerminal(GameResult::WHITE_WON, m,
                              Node::Terminal::Tablebase);
-        } else {  // Cursed wins and blessed losses count as draws.
+        } else if (wdl == WDL_CURSED_WIN) {
+          node->MakeTerminal(GameResult::BLACK_WON, m,
+                             Node::Terminal::Tablebase);
+        } else if (wdl == WDL_BLESSED_LOSS) {
+          node->MakeTerminal(GameResult::WHITE_WON, m,
+                             Node::Terminal::Tablebase);
+        } else { 
           node->MakeTerminal(GameResult::DRAW, m, Node::Terminal::Tablebase);
         }
         search_->tb_hits_.fetch_add(1, std::memory_order_acq_rel);
