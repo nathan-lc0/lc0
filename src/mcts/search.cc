@@ -698,14 +698,14 @@ std::vector<EdgeAndNode> Search::GetBestChildrenNoTemperature(Node* parent,
 
         // Neither is terminal, use standard rule.
         if (a_rank == kNonTerminal) {
-          // Prefer largest playouts then eval then prior.
-          if (a.GetN() != b.GetN()) return a.GetN() > b.GetN();
+          // Prefer eval then largest playouts then prior.
           // Default doesn't matter here so long as they are the same as either
           // both are N==0 (thus we're comparing equal defaults) or N!=0 and
           // default isn't used.
           if (a.GetQ(0.0f, draw_score) != b.GetQ(0.0f, draw_score)) {
             return a.GetQ(0.0f, draw_score) > b.GetQ(0.0f, draw_score);
           }
+          if (a.GetN() != b.GetN()) return a.GetN() > b.GetN();
           return a.GetP() > b.GetP();
         }
 
